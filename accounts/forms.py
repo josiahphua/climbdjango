@@ -5,7 +5,4 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = '__all__'
-
-    def __str__(self):
-        return self.username
+        

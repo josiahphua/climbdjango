@@ -7,11 +7,11 @@ from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 def login_user(request):
     login_form = AuthenticationForm()
-    user = User.object.get() # << can use (pk=id) if I wanna search username can also input username
-    print(user)
+    # user = User.object.get() # << can use (pk=id) if I wanna search username can also input username
+    # print(user)
     if request.method == "POST":
         login_form = AuthenticationForm(request.POST)
-        if login_form.is_valid:
+        if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
 
@@ -21,11 +21,15 @@ def login_user(request):
                 login(request, user)
                 return redirect("/") # this will be the home page after login.
 
+    context = {"login_form": login_form}
+    return render(request, "accounts/login.html", context)
+
 def register_user(request):
     register = RegisterUserForm()
     if request.method == "POST":
         register = RegisterUserForm(request.POST)
-        if register.is_valid:
+        if register.is_valid():
+            print("this is user", user)
             user = register.save()
             login(request, user)
             # return redirect("") redirect to home page.
