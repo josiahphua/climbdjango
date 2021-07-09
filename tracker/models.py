@@ -4,4 +4,4 @@ from django.db import models
 # Create your models here.
 class Tracker(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+    title = models.CharField(max_length=50)
