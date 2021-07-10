@@ -4,5 +4,5 @@ from . import views
 app_name = "tracker"
 
 urlpatterns = [
-    path("api/", views.tracker_index, name="index")
+    path("practice/", views.for_practice, name="index")
 ]

@@ -12,8 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 def login_user(request):
     login_form = AuthenticationForm()
     text = None
-    # user = User.object.get() # << can use (pk=id) if I wanna search username can also input username
-    # print(user)
+    user = User.objects.all() # << can use (pk=id) if I wanna search username can also input username
+    print(user)
     if request.method == "POST":
         print(request.POST)
         login_form = AuthenticationForm(request, data=request.POST)
@@ -29,7 +29,7 @@ def login_user(request):
             if user is not None:
                 print("how about here?")
                 login(request, user)
-                text = "this is the text when user logs in"
+                text = "this is the text when user logs in create a redirect page."
                 return HttpResponse(text)
             else:
                 print("here leh?")
