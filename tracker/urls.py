@@ -1,8 +1,7 @@
-from django.urls.conf import path
-from . import views
+from rest_framework import routers, urlpatterns
+from .api import TrackerViewset
 
-app_name = "tracker"
+router = routers.DefaultRouter()
+router.register("api/tracker", TrackerViewset, 'tracker')
 
-urlpatterns = [
-    path("practice/", views.for_practice, name="index")
-]
+urlpatterns = router.urls
