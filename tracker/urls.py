@@ -1,7 +1,9 @@
 from rest_framework import routers, urlpatterns
-from .api import TrackerViewset
+from . import views
 
 router = routers.DefaultRouter()
-router.register("api/tracker", TrackerViewset, 'tracker')
+router.register("tracker", views.TrackerViewset)
+router.register("route", views.RouteView)
+router.register("routetracker", views.RoutesTrackerView)
 
 urlpatterns = router.urls
