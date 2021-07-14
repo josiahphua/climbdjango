@@ -1,20 +1,19 @@
-from tracker.models import *
+from tracker.models import Tracker, Route
 #imported Tracker and Route
 from rest_framework import viewsets, permissions
 from .serializers import *
 
 # Tracker Viewset 
 class TrackerViewset(viewsets.ModelViewSet):
-    queryset = Tracker.objects.all().order_by('climb_type')
+    queryset = Tracker.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
     serializer_class = TrackerSerializer
 
-class RouteView(viewsets.ModelViewSet):
+class RouteViewset(viewsets.ModelViewSet):
     queryset = Route.objects.all().order_by('grade')
+    permissions_classes = [
+        permissions.AllowAny
+    ]
     serializer_class = RouteSerializer
-
-class RoutesTrackerView(viewsets.ModelViewSet):
-    queryset = Routes_Tracker.objects.all().order_by('id')
-    serializer_class = Routes_TrackerSerializer

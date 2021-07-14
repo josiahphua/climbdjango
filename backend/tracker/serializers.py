@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from tracker.models import *
+from tracker.models import Tracker, Route
 
 class TrackerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,10 +10,4 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = '__all__'
-
-class Routes_TrackerSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Routes_Tracker
         fields = '__all__'
