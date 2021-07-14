@@ -1,48 +1,52 @@
 import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
 function AddRoute() {
-    const [routes, setRoutes] = useState([]);
-    const [routeDesc, setRouteDesc] = useState('');
-    const [grade, setGrade] = useState('');
-    const [attempts, setAttempts] = useState(0);
-    const [timing, setTiming] = useState(0.0);
-    const {register, handleSubmit} = useForm();
+    const [routesAll, setRoutesAll] = useState({
+        route_desc: "",
+        grade: 0,
+        attempts: 0,
+        timing: 0,
+        climb_type: "BD"
+    });
 
-    const onSubmit = async data =>{
-        await setRouteDesc(data.routeDesc);
-        await setGrade(data.grade);
-        await setAttempts(data.attempts);
-        await setTiming(data.timing);
-        document.getElementById("routeForm").reset()
+    const whenChange = async (e) =>{
+        setRoutesAll(prevState =>({
+             ...prevState, 
+                [e.target.name] : e.target.value
+            
+        }));
+    };
 
-        let postRoute = async () =>{
-            await axios.post("/api/route/", {
-                "route_desc" : routeDesc,
-                "grade" : grade,
-                "attempts" : attempts,
-                "timing" : timing
-            }).then(res=>{
-                console.log(res)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }
-        await postRoute()
-    }
+    let postRoute = async (e) =>{
+        e.preventDefault()
+        console.log("I'm going to post")
+        await axios.post(`http://localhost:8000/api/route/`, routesAll).then(res=>{
+            console.log("success",res)
+        }).catch(err=>{
+            console.log(err.response)
+        });
+        document.getElementById("routeForm").reset();
+    };
+    
+    console.log("this is 2nd all", routesAll)
 
     return (
-        <div>
-            <form id="routeForm" className="container" method="post" onSubmit={
-                handleSubmit(onSubmit)} >
-                <input className="row mx-1 my-1" type="text" placeholder="name/colour" {...register("routeDesc")} />
-                <input className="row mx-1 my-1" type="text" placeholder="grade(gym rating)"{...register("grade")} />
-                <input className="row mx-1 my-1" type="number" placeholder="attempt(s)" {...register("attempts")} />
-                <input className="row mx-1 my-1" type="float" placeholder="timing" {...register("timing")} />
-                <Button className="row mx-1 my-1" type="submit" className="btn btn-dark">Submit</Button>
+        <div className="container">
+            <form id="routeForm" className="container" method="post" onSubmit={postRoute} >
+                <input className="row mx-1 my-1" type="text" placeholder="name/colour" name="route_desc" onChange={whenChange} />
+                <input className="row mx-1 my-1" type="text" placeholder="grade(bars)" name="grade" onChange={whenChange} />
+                <input className="row mx-1 my-1" type="number" placeholder="attempt(s)" name="attempts" onChange={whenChange} />
+                <input className="row mx-1 my-1" type="float" placeholder="timing" name="timing" onChange={whenChange} />
+                <select name="climb_type" onChange={whenChange}>
+                    <option value="BD">Boulder</option>
+                    <option value="TR">Top Rope</option>
+                    <option value="LD">Lead</option>
+                    <option value="SP">Speed</option>
+                </select>
+                <Button type="submit" className="row mx-1 my-1 btn btn-dark">Submit</Button>
             </form>
         </div>
     )

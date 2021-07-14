@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
-import {useForm} from 'react-hook-form';
-import { Table} from '@material-ui/core'
 import RouteDG from './mat-ui/RouteDG';
-import {Modal, Button} from 'react-bootstrap';
 import AddRoute from './AddRoute';
 
 
 
-function AllRoutes() {
-    const [rows, setRows] = useState([])
-    const [show, setShow] = useState(false)
+function AllRoutes({selectRow}) {
+    const [rows, setRows] = useState([]);
+    const [show, setShow] = useState(false);
 
-    const toggleform = () => setShow(!show)
-    
-    
+    console.log(selectRow)
 
     useEffect(() => {
         let getRoutes = async () =>{
-            await axios.get("/api/route/").then(res=>{
-                setRows(res.data)
+            await axios.get(`http://localhost:8000/api/route/`).then(res=>{
+                setRows(res.data);
                 
             }).catch(err=>{
-                console.log("error for getting Routes", err)
+                console.log(err.response)
+                console.log("error for getting Routes", err);
             })
         }
-        getRoutes()
-    }, [])
-
+        getRoutes();
+    }, []);
 
     return (
         <div>
@@ -36,18 +32,12 @@ function AllRoutes() {
             </div>
 
             <div className="container">
-                <Button className="btn btn-dark" onClick={toggleform}>Add Route</Button>
-                {show?
-                    <>
-                      <AddRoute />  
-                    </>
-                    : <></>
-                }
+                <Link className="btn btn-dark nav-link" to='/routes/add'>Add Attempted Route</Link>
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 export default AllRoutes
 

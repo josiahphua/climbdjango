@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 
 export default function RouteDG({rows}) {
+  const [selectRow, setSelectRow] = useState({})
 
-    console.log(rows)
+    console.log(selectRow)
 
     const columns = [
-        // { field: 'id', headerName: 'ID', width: 50 },
         {
             field: 'route_desc',
             headerName: 'Description',
@@ -41,9 +41,17 @@ export default function RouteDG({rows}) {
           width: 250,
           editable: true,
         },
-        
-      ];
+    ];
       
+    const handleRowSelected = (x) => {
+      let stupid = x.api.current.getSelectedRows()
+      console.log(stupid)
+      let hi = Object.fromEntries(stupid)
+      console.log(hi)
+      setSelectRow(hi)
+      console.log(selectRow)
+    }
+
   return (
     <div style={{ height: 400, width: '100%' }}>
         <DataGrid
@@ -51,9 +59,12 @@ export default function RouteDG({rows}) {
         columns={columns}
         pageSize={5}
         checkboxSelection
-        disableSelectionOnClick
+        onRowSelected={(x) => handleRowSelected(x)}
         />
     </div>
   );
 }
+
+// disableSelectionOnClick
+
 
