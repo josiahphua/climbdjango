@@ -30,6 +30,9 @@ I used django djoser for authentication and react redux for the frontend of it.
 Djoser helps set up the backend required for authentication to work. I will just have to follow a strict way of saving data and the access points for which to grab data.
 React redux was not easy to setup as there are many possible scenarios, thanks to djoser. But it was pretty straightforward with the help of the documentation.
 </p>
+<br/>
+<hr/>
+<br/>
 <h4>Showcasing the App</h4>
 <p>
 As of now, the app is still a work in progress and I can get the user to submit their routes and attempts through a form into the database. I can then populate the data in a form of a table.
