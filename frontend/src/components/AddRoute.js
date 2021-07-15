@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 
@@ -48,6 +49,7 @@ function AddRoute() {
                 </select>
                 <Button type="submit" className="row mx-1 my-1 btn btn-dark">Submit</Button>
             </form>
+            <Link to="/routes" className="nav-link">Back to Routes</Link>
         </div>
     )
 }

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'tracker',
     'djoser',
+    'events',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist'
@@ -59,7 +61,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'climb_D_jango.urls'
 
@@ -89,15 +94,15 @@ WSGI_APPLICATION = 'climb_D_jango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "climb_d_jango",
-        'USER': "twangxh",
-        "HOST": "localhost",
-        "PORT": 5432,
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': "climb_d_jango",
+        # 'USER': "twangxh",
+        # "HOST": "localhost",
+        # "PORT": 5432,
     }
 }
-
-
+DATABASES['default'] = dj_database_url.config(default='postgres://nilkviooywvsou:9ef7921790e16e9d7ff435514418693e2d063bc8aa715019490478bc54e547d2@ec2-52-23-40-80.compute-1.amazonaws.com:5432/d1hbuhidesmjrk')
+# print(DATABASES)
 # this is setup so that I can have the host email send out password resets and other links
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -143,12 +148,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(PROJECT_ROOT, 'build/static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')    
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated'

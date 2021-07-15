@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Home = ({ isAuthenticated }) => {
-
+const Home = ({ isAuthenticated, user }) => {
+    console.log("this is the user",user)
+    
     return (    
     <div className='container'>
         <div class='jumbotron mt-5'>
@@ -33,7 +34,8 @@ const Home = ({ isAuthenticated }) => {
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 })
 
 export default connect(mapStateToProps)(Home);
