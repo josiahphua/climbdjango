@@ -1,0 +1,1 @@
+web: gunicorn climb_D_jango.wsgi --log-file -

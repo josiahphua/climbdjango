@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/auth';
 
-const Navi = ({  }) => {
-
+const Navi = () => {
     const [redirect, setRedirect] = useState(false);
     const {isAuthenticated} = useSelector(state => state.auth)
     const dispatch = useDispatch()

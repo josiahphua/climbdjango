@@ -10,7 +10,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
     }, []);
 
     return (
-            <div>
+            <div className="hocs" id="this">
                 <Navi />
                 {children}
             </div>
