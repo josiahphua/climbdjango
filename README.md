@@ -25,6 +25,7 @@ Python with Django Framework: Is nice like that. Or cool like that.
 <li>
 JavaScript with React: Redux is a pain to setup, but an elixir after setup.
 </li>
+<br/>
 <p>
 I used django djoser for authentication and react redux for the frontend of it.
 <br/>
