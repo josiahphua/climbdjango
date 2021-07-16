@@ -19,11 +19,12 @@ Though for now, the function is not yet up.
 <hr/>
 <br/>
 <h4>Language used</h4>
-<p>
+<li>
 Python with Django Framework: Is nice like that. Or cool like that.
-<br/>
+</li>
+<li>
 JavaScript with React: Redux is a pain to setup, but an elixir after setup.
-</p>
+</li>
 <p>
 I used django djoser for authentication and react redux for the frontend of it.
 <br/>
