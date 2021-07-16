@@ -94,14 +94,14 @@ WSGI_APPLICATION = 'climb_D_jango.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': "climb_d_jango",
-        # 'USER': "twangxh",
-        # "HOST": "localhost",
-        # "PORT": 5432,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "climb_d_jango",
+        'USER': "twangxh",
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
-DATABASES['default'] = dj_database_url.config(default='postgres://nilkviooywvsou:9ef7921790e16e9d7ff435514418693e2d063bc8aa715019490478bc54e547d2@ec2-52-23-40-80.compute-1.amazonaws.com:5432/d1hbuhidesmjrk')
+# DATABASES['default'] = dj_database_url.config(default='postgres://nilkviooywvsou:9ef7921790e16e9d7ff435514418693e2d063bc8aa715019490478bc54e547d2@ec2-52-23-40-80.compute-1.amazonaws.com:5432/d1hbuhidesmjrk')
 # print(DATABASES)
 # this is setup so that I can have the host email send out password resets and other links
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -195,7 +195,7 @@ DJOSER = {
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
+    # 'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
         'user': 'accounts.serializers.UserCreateSerializer',

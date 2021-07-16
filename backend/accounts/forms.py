@@ -1,6 +1,5 @@
-from backend.accounts.models import UserAccount
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import *
+from accounts.models import UserAccount
 
 class RegisterUserForm(UserCreationForm):
 

@@ -2,10 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 class UserAccountManager(BaseUserManager):
+
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
 
+        # this sends back climbdjango@gmail.com when email is climb.d.jango@gmail.com
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
 
